@@ -12,11 +12,17 @@
 }
 html{
   height: -webkit-fill-available;
+  scroll-behavior: smooth;
 }
 
 
 section{
   min-height: 100vh;
+}
+
+.container-projects {
+  max-width: 900px;
+  width: 100%;
 }
 
 
@@ -62,6 +68,7 @@ section{
 
 .animate {
   transition: variables.$transition;
+  display: inline-block;
 }
 .animateCardWork{
   animation: bounce 2s  infinite;
@@ -84,7 +91,8 @@ section{
   margin: 0;
 
   &:hover {
-    height: 318px;
+    height: 245px;
+    padding-bottom: 1rem;
     transform: skew(0deg);
     animation: none;
   }
@@ -166,6 +174,12 @@ form {
           red 90deg,
           transparent 91deg,
         );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:focus-within::before {
+      opacity: 1;
     }
 
     input {
@@ -201,20 +215,18 @@ form {
       border: none;
       outline: 5px solid #000;
       background-color: #000;
+      resize: vertical;
 
       &::-webkit-resizer {
         display: none;
       }
 
       &:focus {
-        outline: none
+        outline: none;
       }
 
-      &:not(:placeholder-shown) {
-        outline: 4px solid variables.$mainColor;
-        border-radius: 0;
-      }
-
+      // Only show the green border when the textarea has content AND its container has focus
+      // This keeps it consistent with the input behavior (conic spinner + green border on focus)
     }
   }
 
@@ -259,14 +271,179 @@ form {
 
 @media (hover: none) {
   .cardWork {
-    height: 318px;
+    height: 245px;
+    padding-bottom: 1rem;
     transform: skew(0);
   }
 }
 
 @media screen and (max-width: 768px) {
   .cardWork {
-    height: 318px;
+    height: 245px;
+    padding-bottom: 1rem;
     transform: skew(0);
   }
 }
+
+.project-title {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  
+  @media screen and (max-width: 992px) {
+    font-size: calc(2rem + 4vw) !important;
+  }
+  @media screen and (max-width: 576px) {
+    font-size: 2.2rem !important;
+  }
+}
+
+.project-logos-container {
+  display: inline-flex; /* Only occupies the exact width of the logos */
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  height: 110px;
+  margin-top: 1rem;
+  padding: 0 10px 0 0;
+  
+  .stacked-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+    margin-right: -55px; /* Stack/overlap them */
+    
+    &:last-child {
+      margin-right: 0;
+    }
+    
+    // Slight sticker tilt for stacked layout
+    &:nth-child(1) {
+      z-index: 4;
+      transform: rotate(-8deg) translateY(-4px);
+    }
+    &:nth-child(2) {
+      z-index: 3;
+      transform: rotate(6deg) translateY(2px);
+    }
+    &:nth-child(3) {
+      z-index: 2;
+      transform: rotate(-4deg) translateY(-2px);
+    }
+    &:nth-child(4) {
+      z-index: 1;
+      transform: rotate(8deg) translateY(4px);
+    }
+  }
+
+  // Active spread state (toggled via JS on hover)
+  &.spread-active {
+    .stacked-logo {
+      transform: rotate(0deg) translateY(0) scale(1.15);
+      filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.5));
+      margin-right: 15px; /* Spaced out horizontally */
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // Mobile and tablet responsiveness
+  @media screen and (max-width: 768px) {
+    height: 80px;
+    
+    .stacked-logo {
+      width: 70px;
+      height: 70px;
+      margin-right: -38px;
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    
+    &.spread-active {
+      .stacked-logo {
+        transform: rotate(0deg) translateY(0) scale(1.1);
+        margin-right: 10px;
+        
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.home-title {
+  @media screen and (max-width: 768px) {
+    font-size: calc(2.5rem + 3vw) !important;
+  }
+  @media screen and (max-width: 576px) {
+    font-size: 2.8rem !important;
+  }
+  @media screen and (max-width: 380px) {
+    font-size: 2.3rem !important;
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  gap: 6px;
+
+  .scroll-text {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #08FDD8;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    animation: bounceArrow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  }
+}
+
+@keyframes bounceArrow {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+.home-social-link {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+      filter: drop-shadow(0 0 8px #08FDD8);
+    }
+  }
+}

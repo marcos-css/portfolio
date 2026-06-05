@@ -7,7 +7,7 @@ const CustomInput = ({
   placeholder = 'Jane Doe',
   autocomplete = 'off',
   spellcheck = false,
-  isTextArea, requiered = true,
+  isTextArea, required = true,
   handleInput,
   value = '',
   className = '',
@@ -17,12 +17,12 @@ const CustomInput = ({
     <div className={`customInput ${className}`}>
       {
         isTextArea ?
-          <textarea   className='input fs-5' value={value} placeholder={placeholder} spellCheck={spellcheck} name={name} required={requiered} onChange={handleInput} />
+          <textarea   className='input fs-5' value={value} placeholder={placeholder} spellCheck={spellcheck} name={name} required={required} onChange={handleInput} />
           :
-          <input   className='input fs-5' value={value} type={type} name={name} placeholder={placeholder} autoComplete={autocomplete} spellCheck={spellcheck} required={requiered} onChange={handleInput} />}
+          <input   className='input fs-5' value={value} type={type} name={name} placeholder={placeholder} autoComplete={autocomplete} spellCheck={spellcheck} required={required} onChange={handleInput} />}
 
     </div>
   )
 }
 
-export default CustomInput
+export default CustomInput

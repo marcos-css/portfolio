@@ -8,7 +8,8 @@ import Loader from '../Loader';
 import { AppContext } from '../../context/Context';
 import CustomButton from '../CustomButton';
 import Menu from '../Menu';
-import { AiFillGithub } from 'react-icons/ai'
+import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
+import ScrollIndicator from '../ScrollIndicator';
 
 
 const Contact = () => {
@@ -35,18 +36,22 @@ const Contact = () => {
       await emailjs.sendForm('service_sjxa56i', 'template_x60jn1q', form.current, 'Pi9eFgBTZO2yV4WpF')
       notifySucess('Your email has been sent');
       setEmailContent({})
+      // Also reset the DOM form so all inputs visually clear
+      form.current.reset();
     } catch (error) {
-      notifyError(error)
+      notifyError(error.text || error.message || 'An error occurred while sending the email')
     }
   };
 
   useEffect(() => {
-    var inputs = document.querySelectorAll('.input')
-    if (inputs[0].checkValidity() && inputs[1].checkValidity() && inputs[2].checkValidity() && inputs[3].checkValidity()) {
-      setDisableButton(false)
-    } else {
-      setDisableButton(true)
-    }
+    const { user_name, user_email, subject, message } = emailContent;
+    
+    // Email regex validation to verify basic mail structure
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = user_email && emailRegex.test(user_email.trim());
+    
+    const isValid = user_name?.trim() && isEmailValid && subject?.trim() && message?.trim();
+    setDisableButton(!isValid);
   }, [emailContent])
 
   return (
@@ -55,23 +60,32 @@ const Contact = () => {
       <Menu/>
       <ToastContainer />
       <div className='h-100 row m-0'>
-        <div className="vh-100 p-4 col col-12 col-lg-6 d-flex flex-column justify-content-center align-items-center aside-contact ">
+        <div className="vh-100 p-4 col col-12 col-lg-6 d-flex flex-column justify-content-center align-items-center aside-contact position-relative">
           <div className="col col-12 col-md-9 d-flex flex-column">
             <h1 className="display-1 fw-bold text-light mb-3">{generateLetters("Contact", false)}</h1>
             <p className='lead text-light fs-5 mb-4'>
-            I'm currently looking for freelance opportunities, if you have something in mind that I can help you with, please send me a message using the form:)
+            I'm currently looking for internship opportunities or exciting software engineering roles. If you have a project in mind, please send me a message using the form.
             </p>
             <div className="d-flex align-items-center gap-3 mb-4">
-            <AiFillGithub color='#fff' size="2rem"/>
-            <a href='https://github.com/marcos700x' target={'_blank'} className='text-light fs-5 m-0 text-decoration-none'>Github profile</a>
+              <AiFillGithub color='#fff' size="2rem"/>
+              <a href='https://github.com/marcos-css' target={'_blank'} rel='noreferrer' aria-label="Visit Marcos Casas on GitHub" className='text-light fs-5 m-0 text-decoration-none'>Github profile</a>
+            </div>
+            <div className="d-flex align-items-center gap-3 mb-4">
+              <AiFillLinkedin color='#fff' size="2rem"/>
+              <a href='https://www.linkedin.com/in/marcos-casas/' target={'_blank'} rel='noreferrer' aria-label="Visit Marcos Casas on LinkedIn" className='text-light fs-5 m-0 text-decoration-none'>LinkedIn profile</a>
+            </div>
+            <div className="d-flex align-items-center gap-3 mb-4">
+              <AiOutlineMail color='#fff' size="2rem"/>
+              <a href='mailto:marcos.csca@gmail.com' aria-label="Send an email to Marcos Casas" className='text-light fs-5 m-0 text-decoration-none'>marcos.csca@gmail.com</a>
             </div>
               <CustomButton isLink className="fs-5 d-lg-none text-center" href="#form-section" text={'Go to the form'}/>
             <div className="row">
             </div>
           </div>
+          <ScrollIndicator text="Scroll to view form" />
         </div>
         <div id='form-section' className="col col-12 col-lg-6 p-4 pb-lg-0 d-flex justify-content-center flex-column overflow-scroll">
-            <h1 className='text-light display-2 fw-bold mb-4 mt-4 mb-lg-0 p-0 ps-lg-5 pe-lg-5'>{generateLetters("Get in touch", false)}</h1>
+            <h2 className='text-light display-2 fw-bold mb-4 mt-4 mb-lg-0 p-0 ps-lg-5 pe-lg-5'>{generateLetters("Get in touch", false)}</h2>
           <form  className=' p-0 p-lg-5 ' ref={form} onSubmit={sendEmail}>
             <div className="row">
               <div className="col-12 col-lg-6 mb-3 ">
