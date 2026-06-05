@@ -37,7 +37,7 @@ export const DataPortfolio = [
         description: "Frontend development for a university campus interactive map. Developed the frontend with React and TypeScript as part of a 5-developer team, consuming a FastAPI/PostgreSQL RESTful API for real-time location filtering and rendering.",
         links: {
             web: '',
-            github: 'https://github.com/marcos-css/Mapa-Interactivo-UACJ',
+            github: 'https://github.com/LuisFlores223046/Proyecto-Innovacion',
         }
     },
 ]
