@@ -1,10 +1,13 @@
 import React from 'react'
 
-const ScrollIndicator = ({ text = "Scroll to see more" }) => {
+const ScrollIndicator = ({ text, direction = "down" }) => {
+  const displayText = text || (direction === "up" ? "Scroll up" : "Scroll for more");
+  
   return (
     <div className="scroll-indicator d-lg-none">
-      <span className="scroll-text">{text}</span>
-      <div className="arrow-down"></div>
+      {(direction === "up" || direction === "both") && <div className="arrow-up"></div>}
+      <span className="scroll-text">{displayText}</span>
+      {(direction === "down" || direction === "both") && <div className="arrow-down"></div>}
     </div>
   )
 }

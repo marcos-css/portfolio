@@ -1,26 +1,56 @@
-import React, { createContext, useEffect } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const AppContext = createContext()
 
 const Context = ({ children }) => {
+    const [effectsEnabled, setEffectsEnabled] = useState(() => {
+        const saved = localStorage.getItem('animationsEnabled');
+        if (saved !== null) {
+            return JSON.parse(saved);
+        }
+        return true;
+    });
+
+    useEffect(() => {
+        localStorage.setItem('animationsEnabled', JSON.stringify(effectsEnabled));
+        if (!effectsEnabled) {
+            document.body.classList.add('disable-effects');
+        } else {
+            document.body.classList.remove('disable-effects');
+        }
+    }, [effectsEnabled]);
 
     const generateLetters = (message, wrap, indexWrap) => {
-        var aux = []
-        var arrayMessage = Array.from(message)
+        var aux = [];
+        var currentWord = [];
+        var arrayMessage = Array.from(message);
+        
         arrayMessage.forEach((element, index) => {
-          if (element === ' ') {
-            aux.push(<span key={index} style={{ cursor: 'default' }}>&nbsp;</span>)
-          } else {
-            aux.push(
-            <span className='animate' style={{ cursor: 'default' }} key={index}>{element}</span>
-            )
-          }
+            if (wrap && index === indexWrap) {
+                if (currentWord.length > 0) {
+                    aux.push(<span key={`w${index}`} style={{ whiteSpace: 'nowrap' }}>{currentWord}</span>);
+                    currentWord = [];
+                }
+                aux.push(<br key={`br${index}`} />);
+            } else if (element === ' ') {
+                if (currentWord.length > 0) {
+                    aux.push(<span key={`w${index}`} style={{ whiteSpace: 'nowrap' }}>{currentWord}</span>);
+                    currentWord = [];
+                }
+                aux.push(<span key={`s${index}`}>{" "}</span>);
+            } else {
+                currentWord.push(
+                    <span className='animate' style={{ cursor: 'default', display: 'inline-block' }} key={`l${index}`}>{element}</span>
+                );
+            }
         });
-        if(wrap){
-          aux.splice(indexWrap, 1, <br key={indexWrap} />)
+        
+        if (currentWord.length > 0) {
+            aux.push(<span key={`w_end`} style={{ whiteSpace: 'nowrap' }}>{currentWord}</span>);
         }
-        return aux
-      }
+        
+        return aux;
+    }
       const AnimateLetters = () => useEffect(() => {
     
         document.querySelectorAll('.animate').forEach((item) => {
@@ -42,7 +72,7 @@ const Context = ({ children }) => {
       }, [])
 
   return (
-    <AppContext.Provider value={{ generateLetters, AnimateLetters }}>
+    <AppContext.Provider value={{ generateLetters, AnimateLetters, effectsEnabled, setEffectsEnabled }}>
         { children }
     </AppContext.Provider>
   )
