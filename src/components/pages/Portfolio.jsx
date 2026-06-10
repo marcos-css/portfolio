@@ -127,6 +127,7 @@ const Portfolio = () => {
                       aria-label={`Visit ${obj.title} website`}
                       className="text-white text-xl"
                       href={obj.links.web}
+                      data-umami-event={`Visit ${obj.title} website`}
                     >
                       View website
                     </a>
@@ -144,6 +145,7 @@ const Portfolio = () => {
                       aria-label={`View ${obj.title} on GitHub`}
                       className="text-white text-xl"
                       href={obj.links.github}
+                      data-umami-event={`Visit ${obj.title} on GitHub`}
                     >
                       Github
                     </a>
@@ -154,12 +156,14 @@ const Portfolio = () => {
           </div>
 
           {/* Mobile scroll indicator */}
-          <ScrollIndicator 
+          <ScrollIndicator
             direction={
-              index === 0 ? "down" : 
-              index === DataPortfolio.length - 1 ? "up" : 
-              "both"
-            } 
+              index === 0
+                ? "down"
+                : index === DataPortfolio.length - 1
+                  ? "up"
+                  : "both"
+            }
           />
         </section>
       ))}

@@ -21,11 +21,11 @@ const Menu = () => {
         <span className="bottom"></span>
       </label>
 
-      <div 
+      <div
         className={`menu-wrapper ${showMenu ? "show" : ""}`}
         onClick={() => setShowMenu(false)}
       >
-        <div 
+        <div
           className={`menu-content ${showMenu ? "show" : ""}`}
           onClick={(e) => e.stopPropagation()}
         >
@@ -68,7 +68,6 @@ const Menu = () => {
             <span className="activeDecoration"></span>
           </div>
 
-          {/* CV Link at the bottom */}
           <div className="mt-8 flex justify-center">
             <a
               href={SocialLinks.cv}
@@ -76,9 +75,12 @@ const Menu = () => {
               rel="noreferrer"
               onClick={() => setShowMenu(false)}
               className="flex items-center gap-2 px-6 py-3 border border-[#08fdd8] text-[#08fdd8] rounded-full hover:bg-[#08fdd8]/10 transition-colors"
+              data-umami-event="Download CV - Menu"
             >
               <AiFillFilePdf size="1.2rem" />
-              <span className="font-semibold tracking-wider text-sm">DOWNLOAD CV</span>
+              <span className="font-semibold tracking-wider text-sm">
+                DOWNLOAD CV
+              </span>
             </a>
           </div>
         </div>

@@ -62,6 +62,7 @@ const Home = () => {
                 rel="noreferrer"
                 aria-label="Download Marcos Casas CV"
                 className="social-link flex items-center gap-2 text-white hover:text-[#08fdd8] transition-colors"
+                data-umami-event="Download CV - Home"
               >
                 <AiFillFilePdf size="2rem" />
                 <span className="text-lg">Download CV</span>
@@ -72,6 +73,7 @@ const Home = () => {
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on GitHub"
                 className="social-link"
+                data-umami-event="Visit GitHub - Home"
               >
                 <AiFillGithub size="2rem" color="#fff" />
               </a>
@@ -81,6 +83,7 @@ const Home = () => {
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on LinkedIn"
                 className="social-link"
+                data-umami-event="Visit LinkedIn - Home"
               >
                 <AiFillLinkedin size="2rem" color="#fff" />
               </a>

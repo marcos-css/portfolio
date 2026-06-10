@@ -7,7 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { AppContext } from "../../context/Context";
 import CustomButton from "../CustomButton";
 import Menu from "../Menu";
-import { AiFillGithub, AiFillLinkedin, AiOutlineMail, AiFillFilePdf } from "react-icons/ai";
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineMail,
+  AiFillFilePdf,
+} from "react-icons/ai";
 import { SocialLinks } from "../../data/DataPortfolio";
 import ScrollIndicator from "../ScrollIndicator";
 import { GlitterFinal } from "../animated-hero-with-web-gl-glitter";
@@ -84,6 +89,7 @@ const Contact = () => {
                 rel="noreferrer"
                 aria-label="Download Marcos Casas CV"
                 className="text-white text-lg"
+                data-umami-event="Download CV - Contact"
               >
                 Download CV
               </a>
@@ -96,6 +102,7 @@ const Contact = () => {
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on GitHub"
                 className="text-white text-lg"
+                data-umami-event="Visit GitHub - Contact"
               >
                 Github profile
               </a>
@@ -108,6 +115,7 @@ const Contact = () => {
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on LinkedIn"
                 className="text-white text-lg"
+                data-umami-event="Visit LinkedIn - Contact"
               >
                 LinkedIn profile
               </a>
@@ -118,12 +126,17 @@ const Contact = () => {
                 href={`mailto:${SocialLinks.email}`}
                 aria-label="Send an email to Marcos Casas"
                 className="text-white text-lg"
+                data-umami-event="Send Email - Contact"
               >
                 {SocialLinks.email}
               </a>
             </div>
             <div className="lg:hidden mt-4">
-              <CustomButton isLink href="#form-section" text={"Go to the form"} />
+              <CustomButton
+                isLink
+                href="#form-section"
+                text={"Go to the form"}
+              />
             </div>
           </div>
           <div className="lg:hidden">
@@ -141,43 +154,43 @@ const Contact = () => {
             </h2>
             <form className="w-full" ref={form} onSubmit={sendEmail}>
               <div className="flex flex-col lg:flex-row lg:gap-4">
-              <div className="w-full mb-3">
-                <CustomInput
-                  value={emailContent.user_name}
-                  type="text"
-                  name="user_name"
-                  placeholder="Name"
-                  autocomplete={"off"}
-                  handleInput={handleInput}
-                />
+                <div className="w-full mb-3">
+                  <CustomInput
+                    value={emailContent.user_name}
+                    type="text"
+                    name="user_name"
+                    placeholder="Name"
+                    autocomplete={"off"}
+                    handleInput={handleInput}
+                  />
+                </div>
+                <div className="w-full mb-3">
+                  <CustomInput
+                    value={emailContent.user_email}
+                    type="email"
+                    name="user_email"
+                    placeholder="Email"
+                    autocomplete={"off"}
+                    handleInput={handleInput}
+                  />
+                </div>
               </div>
-              <div className="w-full mb-3">
-                <CustomInput
-                  value={emailContent.user_email}
-                  type="email"
-                  name="user_email"
-                  placeholder="Email"
-                  autocomplete={"off"}
-                  handleInput={handleInput}
-                />
-              </div>
-            </div>
-            <CustomInput
-              className="mb-3 "
-              value={emailContent.subject}
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              handleInput={handleInput}
-            />
-            <CustomInput
-              className="mb-3 "
-              value={emailContent.message}
-              isTextArea
-              name="message"
-              placeholder="Message"
-              handleInput={handleInput}
-            />
+              <CustomInput
+                className="mb-3 "
+                value={emailContent.subject}
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                handleInput={handleInput}
+              />
+              <CustomInput
+                className="mb-3 "
+                value={emailContent.message}
+                isTextArea
+                name="message"
+                placeholder="Message"
+                handleInput={handleInput}
+              />
 
               <CustomButton
                 className={"mb-3"}
