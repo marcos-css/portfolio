@@ -4,7 +4,8 @@ import { HashLink as Link } from "react-router-hash-link";
 import { AppContext } from "../../context/Context";
 import CustomButton from "../CustomButton";
 import Menu from "../Menu";
-import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { AiFillGithub, AiFillLinkedin, AiFillFilePdf } from "react-icons/ai";
+import { SocialLinks } from "../../data/DataPortfolio";
 import { GlitterFinal as GlitterEffect } from "../animated-hero-with-web-gl-glitter";
 
 const Home = () => {
@@ -54,9 +55,19 @@ const Home = () => {
                 />
               </Link>
             </div>
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-4 mt-4 flex-wrap">
               <a
-                href="https://github.com/marcos-css"
+                href={SocialLinks.cv}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Download Marcos Casas CV"
+                className="social-link flex items-center gap-2 text-white hover:text-[#08fdd8] transition-colors"
+              >
+                <AiFillFilePdf size="2rem" />
+                <span className="text-lg">Download CV</span>
+              </a>
+              <a
+                href={SocialLinks.github}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on GitHub"
@@ -65,7 +76,7 @@ const Home = () => {
                 <AiFillGithub size="2rem" color="#fff" />
               </a>
               <a
-                href="https://www.linkedin.com/in/marcos-casas/"
+                href={SocialLinks.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on LinkedIn"

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { SocialLinks } from "../data/DataPortfolio";
+import { AiFillFilePdf } from "react-icons/ai";
 
 const Menu = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -64,6 +66,20 @@ const Menu = () => {
               Portfolio
             </Link>
             <span className="activeDecoration"></span>
+          </div>
+
+          {/* CV Link at the bottom */}
+          <div className="mt-8 flex justify-center">
+            <a
+              href={SocialLinks.cv}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setShowMenu(false)}
+              className="flex items-center gap-2 px-6 py-3 border border-[#08fdd8] text-[#08fdd8] rounded-full hover:bg-[#08fdd8]/10 transition-colors"
+            >
+              <AiFillFilePdf size="1.2rem" />
+              <span className="font-semibold tracking-wider text-sm">DOWNLOAD CV</span>
+            </a>
           </div>
         </div>
       </div>

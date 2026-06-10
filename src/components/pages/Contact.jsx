@@ -7,7 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { AppContext } from "../../context/Context";
 import CustomButton from "../CustomButton";
 import Menu from "../Menu";
-import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
+import { AiFillGithub, AiFillLinkedin, AiOutlineMail, AiFillFilePdf } from "react-icons/ai";
+import { SocialLinks } from "../../data/DataPortfolio";
 import ScrollIndicator from "../ScrollIndicator";
 import { GlitterFinal } from "../animated-hero-with-web-gl-glitter";
 
@@ -76,9 +77,21 @@ const Contact = () => {
               send me a message using the form.
             </p>
             <div className="flex items-center gap-3 mb-4 social-link">
+              <AiFillFilePdf color="#fff" size="2rem" />
+              <a
+                href={SocialLinks.cv}
+                target={"_blank"}
+                rel="noreferrer"
+                aria-label="Download Marcos Casas CV"
+                className="text-white text-lg"
+              >
+                Download CV
+              </a>
+            </div>
+            <div className="flex items-center gap-3 mb-4 social-link">
               <AiFillGithub color="#fff" size="2rem" />
               <a
-                href="https://github.com/marcos-css"
+                href={SocialLinks.github}
                 target={"_blank"}
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on GitHub"
@@ -90,7 +103,7 @@ const Contact = () => {
             <div className="flex items-center gap-4 mb-4 social-link w-fit">
               <AiFillLinkedin color="#fff" size="2rem" />
               <a
-                href="https://www.linkedin.com/in/marcos-casas/"
+                href={SocialLinks.linkedin}
                 target={"_blank"}
                 rel="noreferrer"
                 aria-label="Visit Marcos Casas on LinkedIn"
@@ -102,11 +115,11 @@ const Contact = () => {
             <div className="flex items-center gap-4 mb-4 social-link w-fit">
               <AiOutlineMail color="#fff" size="2rem" />
               <a
-                href="mailto:marcos.csca@gmail.com"
+                href={`mailto:${SocialLinks.email}`}
                 aria-label="Send an email to Marcos Casas"
                 className="text-white text-lg"
               >
-                marcos.csca@gmail.com
+                {SocialLinks.email}
               </a>
             </div>
             <div className="lg:hidden mt-4">

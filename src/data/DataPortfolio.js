@@ -10,6 +10,13 @@ import logo_css from "../img/logo-css.png";
 import logo_js from "../img/logo-javascript.png";
 import logo_python from "../img/logo-python.png";
 
+export const SocialLinks = {
+  cv: "https://docs.google.com/document/d/1nSDyjeCbxfsJpmYWHnQBuK9iG3eoPh8Qf0hR3S0eQ9I/export?format=pdf", // Reemplaza este '#' con tu enlace de Google Drive
+  github: "https://github.com/marcos-css",
+  linkedin: "https://www.linkedin.com/in/marcos-casas/",
+  email: "marcos.csca@gmail.com",
+};
+
 export const DataPortfolio = [
   {
     title: "Spendix",
